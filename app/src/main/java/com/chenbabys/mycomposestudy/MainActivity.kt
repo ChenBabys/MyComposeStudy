@@ -17,21 +17,37 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.chenbabys.mycomposestudy.ui.screens.Conversation
+import com.chenbabys.mycomposestudy.ui.screens.MainScreen
+import com.chenbabys.mycomposestudy.ui.screens.MessageCard
 import com.chenbabys.mycomposestudy.ui.theme.MyComposeStudyTheme
 
 class MainActivity : ComponentActivity() {
+
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyComposeStudyTheme {
+            MyComposeStudyTheme {//添加MaterialTheme主题
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    UILayout()
+                    //UILayout()
+                    Conversation(
+                        arrayListOf(
+                            "我超级爱周杰伦我超级爱周杰伦我超级爱周杰伦我超级爱周杰伦",
+                            "我超级爱林俊杰我超级爱林俊杰我超级爱林俊杰我超级爱林俊杰",
+                            "我超级爱邓紫棋我超级爱邓紫棋我超级爱邓紫棋我超级爱邓紫棋",
+                            "我超级爱林俊杰我超级爱林俊杰我超级爱林俊杰我超级爱林俊杰",
+                            "我超级爱周杰伦我超级爱周杰伦我超级爱周杰伦我超级爱周杰伦",
+                            "我超级爱邓紫棋我超级爱邓紫棋我超级爱邓紫棋我超级爱邓紫棋"
+                        )
+                    )
                 }
             }
         }
@@ -42,6 +58,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String) {
     Text(text = "Hello $name!")
 }
+
 @ExperimentalAnimationApi
 @Composable
 fun UILayout() {
@@ -93,11 +110,12 @@ fun UILayout() {
         }
     }
 }
+
 @ExperimentalAnimationApi
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     MyComposeStudyTheme {
-        UILayout()
+        //UILayout()
     }
 }
