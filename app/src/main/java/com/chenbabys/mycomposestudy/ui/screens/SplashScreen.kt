@@ -52,7 +52,7 @@ fun SplashScreen(onSplashCompleted: () -> Unit) {
                 modifier = Modifier
                     .padding(8.dp)
                     .align(Alignment.Center)
-                    .scale(5f)//铺满
+                    .scale(5f)//铺满缩放
             )
             Column(
                 modifier = Modifier.align(Alignment.Center),
