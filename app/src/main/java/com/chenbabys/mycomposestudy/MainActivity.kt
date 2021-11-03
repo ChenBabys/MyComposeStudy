@@ -8,13 +8,16 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
@@ -23,36 +26,47 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.chenbabys.mycomposestudy.ui.screens.Conversation
-import com.chenbabys.mycomposestudy.ui.screens.MainScreen
-import com.chenbabys.mycomposestudy.ui.screens.MessageCard
+import com.chenbabys.mycomposestudy.ui.screens.*
 import com.chenbabys.mycomposestudy.ui.theme.MyComposeStudyTheme
+import com.google.accompanist.insets.ProvideWindowInsets
 
 class MainActivity : ComponentActivity() {
 
-    @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyComposeStudyTheme {//添加MaterialTheme主题
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    //UILayout()
-                    Conversation(
-                        arrayListOf(
-                            "我超级爱周杰伦我超级爱周杰伦我超级爱周杰伦我超级爱周杰伦",
-                            "我超级爱林俊杰我超级爱林俊杰我超级爱林俊杰我超级爱林俊杰",
-                            "我超级爱邓紫棋我超级爱邓紫棋我超级爱邓紫棋我超级爱邓紫棋",
-                            "我超级爱林俊杰我超级爱林俊杰我超级爱林俊杰我超级爱林俊杰",
-                            "我超级爱周杰伦我超级爱周杰伦我超级爱周杰伦我超级爱周杰伦",
-                            "我超级爱邓紫棋我超级爱邓紫棋我超级爱邓紫棋我超级爱邓紫棋"
-                        )
-                    )
+//                Surface(color = MaterialTheme.colors.background) {
+//                    //UILayout()
+//
+//                }
+
+                //使用启动页Splash为先，然后再加载Home
+                ProvideWindowInsets {
+                    val (appState, setAppState) = remember { mutableStateOf(AppState.Splash) }
+                    when (appState) {
+                        AppState.Splash -> {
+                            SplashScreen {
+                                setAppState(AppState.Home)
+                            }
+                        }
+                        AppState.Home -> {
+                            HomeScaffold()
+                        }
+                    }
                 }
+
             }
         }
     }
 }
+
+enum class AppState {
+    Splash,
+    Home
+}
+
 
 @Composable
 fun Greeting(name: String) {
